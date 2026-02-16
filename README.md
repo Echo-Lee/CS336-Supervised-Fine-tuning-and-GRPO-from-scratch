@@ -80,3 +80,12 @@ In ``GRPO_helper.py``, the followings are implemented:
 * ``grpo_microbatch_train_step``: A micro step in gradient accumulation step, return step-loss divided by gradient_accumulation_steps.
 
 In ``GRPO_train.py``, the training framework is implemented. The configs are in ``grpo_train.yaml``. The training process varies from 40 minutes to 80 minutes on 1 H800 GPU.
+
+The sweep of learning rate -- The evaluations were done on 1024 out of 5000 eval datasets:
+![lr-eval-curves](./results/RL-eval-reward.png)
+
+The ablation of length normalization, standart deviation in rewards, and loss type -- The evaluations were done on full 5000 eval datasets:
+![ablation-eval-curves](./results/Module-ablation-eval.png)
+
+The GRPO with multiple tries of epochs and train batchsize, in addition, there is an experiment of RL training on the base of SFT model obtained in the SFT stage, which I found underperform than purely RL trained models.
+![GRPO-eval-curves](./results/GRPO-eval-reward.png)
