@@ -39,3 +39,29 @@ One could get access to MATH dataset via:
 uv tool install hf
 hf download garg-aayush/sft-cs336-assign5-datasets --repo-type=dataset
 ```
+
+## GPU requirments
+
+For SFT part, I personally used 2 vGPU (48GB), with 1 for training and another for vLLM evaluation.
+
+For Reasoning RL part, I used 1 H800 for both training and vLLM evaluation.
+
+## Supervised Fine-Tuning
+
+This part implements SFT from scratch.
+
+In ``SFT_helper.py``, the followings are implemented:
+
+* ``tokenize_prompt_and_output``: Concatenate and tokenize the prompt and output strings, return input_ids, labels and response mask for training.
+* ``compute_entropy``: Calculate token-level entropy given logits.
+* ``get_response_log_probs``: Given input_ids and labels, calculate token-level log_probs with numerical stability methods.
+* ``masked_normalize``: The masked normalized sum of an input tensor.
+* ``sft_microbatch_train_step``: A micro SFT step in gradient accumulation step, return step-loss divided by gradient_accumulation_steps.
+
+In ``policy_evaluation.py``, the followings are implemented:
+
+* ``init_vllm``: Start the inference process, use vLLM to hold a model separate from the policy.
+* ``load_policy_into_vllm_instance``: Load current policy model's weight into existing vLLM instance.
+* ``evaluate_vllm``: Generate response based on vLLM instance and evaluate the performance of model, including reward, response length and entropy, this happens during the training process.
+  
+In ``SFT_train.py``, the training framework is implemented. One could sweep and adjust the configs in ``config.yaml`` to get a better sense of SFT. The training process takes about 30 minutes on 2 vGPU-48GB.
