@@ -1,0 +1,38 @@
+model:
+  model_id: "/root/autodl-tmp/cs336/checkpoints/sft_qwen_1.5b_full/training_samples-4836-checkpoint"
+  tokenizer_path: "/root/autodl-tmp/cs336/checkpoints/sft_qwen_1.5b_full/training_samples-4836-checkpoint"
+  save_dir: "/root/autodl-tmp/cs336/checkpoints/rl_qwen_1.5b_full"
+
+training:
+  n_grpo_steps: 200
+  learning_rate: 2.0e-5
+  advantage_eps: 1.0e-6
+  rollout_batch_size: 256
+  group_size: 8
+  train_batch_size: 128
+  gradient_accumulation_steps: 8
+  loss_type: "grpo_clip"
+  length_norm: "masked_normalize"
+  epochs_per_rollout_batch: 4
+  use_std_normalization: False
+  seed: 42
+  clip_grad: 1.0
+  cliprange: 0.2
+  chunk_size: 32
+
+evaluation:
+  sampling_temperature: 1.0
+  sampling_min_tokens: 4
+  sampling_max_tokens: 1024
+  gpu_memory_utilization: 0.3
+  vllm_device: "cuda:0"
+  eval_interval: 10
+  max_model_len: 1536
+
+data:
+  train_path: "/root/autodl-tmp/cs336/assignment5-alignment-main/data/math/data/sft-reason/train.jsonl"
+  val_path: "/root/autodl-tmp/cs336/assignment5-alignment-main/data/math/data/sft-reason/val.jsonl"
+
+logging:
+  project_name: "cs336-assignment5-rl-reason"
+  run_name: "qwen1.5b-rl-sft-grpo-epoch_4-train_128"

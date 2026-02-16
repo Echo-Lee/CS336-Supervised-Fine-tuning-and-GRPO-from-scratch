@@ -1,0 +1,35 @@
+model:
+  model_id: "/root/autodl-tmp/models/Qwen2.5-Math-1.5B"
+  tokenizer_path: "/root/autodl-tmp/models/Qwen2.5-Math-1.5B"
+  save_dir: "/root/autodl-tmp/cs336/checkpoints/sft_qwen_1.5b_full"
+
+training:
+  max_samples: 3496 # 1
+  max_iter: 230 # 2
+  batch_size: 4
+  gradient_accumulation_steps: 16
+  learning_rate_max: 1e-5 # 2e-5
+  learning_rate_min: 1e-6
+  weight_decay: 0.1 # 0.01
+  clip_grad: 1.0
+  warmup_steps: 20
+  seed: 42
+  cliprange: 0.2
+
+evaluation:
+  eval_interval: 76 # 5
+  eval_batch_size: 512 # 6
+  temperature: 1.0
+  max_tokens: 1024
+  max_model_len: 2048
+  vllm_device: "cuda:0"
+  gpu_memory_utilization: 0.2
+  eval_save_dir: "/root/autodl-tmp/cs336/checkpoints/sft_qwen_1.5b_full/training_samples-full-filtered-checkpoint/eval_results" # 3
+
+data:
+  train_path: "/root/autodl-tmp/cs336/assignment5-alignment-main/data/math/data/sft-reason/sft_gpt-oss-120b_filtered.jsonl"
+  val_path: "/root/autodl-tmp/cs336/assignment5-alignment-main/data/math/data/sft-reason/val.jsonl"
+
+logging:
+  project_name: "cs336-assignment5-sft-reason"
+  run_name: "qwen1.5b-train_full_samples_filtered" # 4
