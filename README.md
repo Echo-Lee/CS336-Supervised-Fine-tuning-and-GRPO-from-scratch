@@ -89,3 +89,4 @@ The ablation of length normalization, standart deviation in rewards, and loss ty
 
 The GRPO with multiple tries of epochs and train batchsize, in addition, there is an experiment of RL training on the base of SFT model obtained in the SFT stage, which I found underperform than purely RL trained models.
 ![GRPO-eval-curves](./results/GRPO-eval-reward.png)
+![GRPO-eval-format](./results/GRPO-eval-format-reward.png)
