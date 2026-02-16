@@ -65,3 +65,15 @@ In ``policy_evaluation.py``, the followings are implemented:
 * ``evaluate_vllm``: Generate response based on vLLM instance and evaluate the performance of model, including reward, response length and entropy, this happens during the training process.
   
 In ``SFT_train.py``, the training framework is implemented. One could sweep and adjust the configs in ``config.yaml`` to get a better sense of SFT. The training process takes about 30 minutes on 2 vGPU-48GB.
+
+## Reasoning RL - GRPO
+
+This part implements Reasoning RL from scratch.
+
+In ``GRPO_helper.py``, the followings are implemented:
+
+* ``compute_group_normalized_rewards``: Compute group normalized rewards for a batch of responses and ground-truth.
+* ``compute_policy_gradient_loss``: Compute token-level loss (log_probs * rewards or advantages), there are three types: ``["no_baseline", "reinforce_with_baseline", "grpo_clip"]``.
+* ``grpo_microbatch_train_step``: A micro step in gradient accumulation step, return step-loss divided by gradient_accumulation_steps.
+
+In ``GRPO_train.py``, the training framework is implemented. The configs are in ``grpo_train.yaml``. The training process varies from 40 minutes to 80 minutes on 1 H800 GPU.
