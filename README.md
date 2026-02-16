@@ -66,6 +66,9 @@ In ``policy_evaluation.py``, the followings are implemented:
   
 In ``SFT_train.py``, the training framework is implemented. One could sweep and adjust the configs in ``config.yaml`` to get a better sense of SFT. The training process takes about 30 minutes on 2 vGPU-48GB.
 
+The train loss curves from different samples used for training:
+(./results/SFT-train-loss.pdf)
+
 ## Reasoning RL - GRPO
 
 This part implements Reasoning RL from scratch.
