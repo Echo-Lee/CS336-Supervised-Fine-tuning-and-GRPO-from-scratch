@@ -30,3 +30,12 @@ Initially, all tests should fail with `NotImplementedError`s.
 To connect your implementation to the tests, complete the
 functions in [./tests/adapters.py](./tests/adapters.py).
 
+## Data Availability
+
+One could get access to MATH dataset via:
+
+```
+# Make sure the hf CLI is installed
+uv tool install hf
+hf download garg-aayush/sft-cs336-assign5-datasets --repo-type=dataset
+```
