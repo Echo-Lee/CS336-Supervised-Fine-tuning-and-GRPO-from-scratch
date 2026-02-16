@@ -1,5 +1,7 @@
 # CS336 Spring 2025 Assignment 5: Alignment
 
+This is my implementation for Assignment 5, which includes Supervised Fine-tuning and Reasoning RL (GRPO) from scratch on Qwen2.5-Math-1.5B.
+
 For a full description of the assignment, see the assignment handout at
 [cs336_spring2025_assignment5_alignment.pdf](./cs336_spring2025_assignment5_alignment.pdf)
 
